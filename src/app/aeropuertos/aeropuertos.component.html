@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-dark text-white">
+            <a class="navbar-brand">AEROPUERTOS</a>
+            <resumen-carrito></resumen-carrito>
+        </div>
+    </div>
+    
+  <div class="row">
+    <div class="col-4 p-2">
+        <button class="btn btn-block btn-danger m-t-3" routerLink="/admin">
+            Admin
+        </button>
+        <div *ngFor="let aeropuerto of aeropuertosMostrados" class="btn btn-outline-primary btn-block" 
+        [class.active]="aeropuerto == aeropuertoSeleccionado"
+        (click)="irVuelos(aeropuerto)"
+        (mouseover)="cambiarAeropuerto(aeropuerto)">
+            {{aeropuerto.nameAirport}}       
+        </div>
+        <div class="text-center botonera" margin-top="25px">
+            <div class="btn-group">
+                <button *ngFor="let pagina of numerosPagina" (click)="cambiarPagina(pagina)" class="btn btn-outline-primary"
+                    [class.active]="pagina == paginaSeleccionada">
+                    {{pagina}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-8 p-2">
+        <div #aeromap class="center-block" style="width:85%;height:400px"></div>
+        <div *ngIf="aeropuertoSeleccionado">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Aeropuerto</th>
+                        <th>Código Iata</th>
+                        <th>Latitud</th>
+                        <th>Longitud</th>
+                        <th>País</th>
+                        <th>Código País</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{aeropuertoSeleccionado.nameAirport}}</td>
+                        <td>{{aeropuertoSeleccionado.codeIataAirport}}</td>
+                        <td>{{aeropuertoSeleccionado.latitudeAirport}}</td>
+                        <td>{{aeropuertoSeleccionado.longitudeAirport}}</td>
+                        <td>{{aeropuertoSeleccionado.nameCountry}}</td>
+                        <td>{{aeropuertoSeleccionado.codeIso2Country}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<h2>Para uso de prueba con datos no sacados online de Aviation Edge</h2>
+<table class="table table-sm table-striped">
+    <thead>
+        <tr>
+            <th>Vuelo número</th>
+            <th>Aerolinea</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let vuelo of getVuelos()">
+            <td>{{vuelo.flight.number}}</td>
+            <td>{{vuelo.airline.name}}</td>
+            <td>
+                <button class="btn btn-sm btn-warning" [routerLink]="['/admin/main/vuelos/editar', vuelo.flight.number]">
+                    Editar
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="borrarVuelo(vuelo.flight.number)">
+                    Borrar
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<button class="btn btn-primary" routerLink="/admin/main/vuelos/crear">
+    Crear nuevo vuelo
+</button>

@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-dark text-white">
+            <a class="navbar-brand">VUELOS</a>
+        </div>
+    </div>
+</div>
+<div *ngIf="pedidoEnviado" class="m-2 text-center">
+    <h2>Gracias!</h2>
+    <p>Gracias por hacer su reserva.</p>
+    <p>Le mantendremos informado.</p>
+    <button class="btn btn-primary" routerLink="/vuelos">Volver a vuelos</button>
+</div>
+<form *ngIf="!pedidoEnviado" #form="ngForm" novalidate (ngSubmit)="submitOrder(form)" class="m-2">
+    <div class="form-group">
+        <label>Nombre</label>
+        <input class="form-control" #name="ngModel" name="nombre" [(ngModel)]="pedido.nombre" required />
+        <span *ngIf="submitted && name.invalid" class="text-danger">
+            Indique su nombre por favor
+        </span>
+    </div>
+    <div class="form-group">
+        <label>Dirección</label>
+        <input class="form-control" #address="ngModel" name="direccion" [(ngModel)]="pedido.direccion" required />
+        <span *ngIf="submitted && address.invalid" class="text-danger">
+            Indique su dirección por favor
+        </span>
+    </div>
+    <div class="form-group">
+        <label>Localidad</label>
+        <input class="form-control" #city="ngModel" name="ciudad" [(ngModel)]="pedido.ciudad" required />
+        <span *ngIf="submitted && city.invalid" class="text-danger">
+            Indique su localidad por favor
+        </span>
+    </div>
+    <div class="form-group">
+        <label>Provincia</label>
+        <input class="form-control" #state="ngModel" name="provincia" [(ngModel)]="pedido.provincia" required />
+        <span *ngIf="submitted && state.invalid" class="text-danger">
+            Indique su provincia por favor
+        </span>
+    </div>
+    <div class="form-group">
+        <label>Código Postal</label>
+        <input class="form-control" #zip="ngModel" name="zip" [(ngModel)]="pedido.zip" required />
+        <span *ngIf="submitted && zip.invalid" class="text-danger">
+            Indique su código por favor
+        </span>
+    </div>
+    <div class="form-group">
+        <label>Pais</label>
+        <input class="form-control" #country="ngModel" name="estado" [(ngModel)]="pedido.estado" required />
+        <span *ngIf="submitted && country.invalid" class="text-danger">
+            Indique su pais por favor
+        </span>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-secondary m-1" routerLink="/cart">Atrás</button>
+        <button class="btn btn-primary m-1" type="submit">Finalizar Pedido</button>
+    </div>
+</form>

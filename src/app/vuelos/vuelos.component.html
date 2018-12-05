@@ -1,0 +1,65 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-dark text-white">
+            <a class="navbar-brand">TABLA DE VUELOS</a>
+            <resumen-carrito></resumen-carrito>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 p-2">
+            <button class="btn btn-block btn-danger m-t-3" routerLink="/admin">
+                Admin
+            </button>
+            <button class="btn btn-block btn-outline-primary" (click)="cambiarAerolinea()">
+                Todas
+            </button>
+            <button *ngFor="let aerolinea of aerolineas" class="btn btn-outline-primary btn-block" [class.active]="aerolinea == aerolineaSeleccionada"
+                (click)="cambiarAerolinea(aerolinea)">
+                {{aerolinea}}
+            </button>            
+        </div>
+        <div class="col-9 p-2">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Vuelo</th>
+                        <th>Compañía</th>
+                        <th >Destino</th>
+                        <th>Partida</th>
+                        <th>Llegada</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-template ngFor let-vuelo [ngForOf]="vuelos">
+                        <tr>
+                            <td>{{vuelo.flight.iataNumber}}</td>
+                            <td>{{vuelo.airline.name}}</td>
+                            <td>{{vuelo.arrival.iataCode}}</td>
+                            <td>{{vuelo.departure.scheduledTime | date:'medium'}}</td>
+                            <td>{{vuelo.arrival.scheduledTime | date:'medium'}}</td>
+                            <td>{{vuelo.status}}</td>
+                            <button class="btn btn-success btn-sm float-right" (click)="addVueloCarrito(vuelo)">
+                                Seleccionar <i class="fa fa-shopping-cart"></i>
+                            </button>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
+            
+            <div class="form-inline float-left mr-1">
+                <select class="form-control" [value]="vuelosPorPagina" (change)="cambiarSizePagina($event.target.value)">
+                    <option value="3">3 por página</option>
+                    <option value="4">4 por página</option>
+                    <option value="6">6 por página</option>
+                    <option value="8">8 por página</option>
+                </select>
+            </div>
+            <div class="btn-group float-right">
+                <button *ngFor="let pagina of numerosPagina" (click)="cambiarPagina(pagina)" class="btn btn-outline-primary" [class.active]="pagina == paginaSeleccionada">
+                    {{pagina}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

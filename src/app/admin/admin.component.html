@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-dark text-white">
+            <a class="navbar-brand">Administración</a>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-3">
+            <button class="btn btn-outline-info btn-block" routerLink="/admin/main/vuelos" routerLinkActive="active">
+                Vuelos
+            </button>
+            <button class="btn btn-outline-info btn-block" routerLink="/admin/main/pedidos" routerLinkActive="active">
+                Pedidos
+            </button>
+            <button class="btn btn-outline-danger btn-block" (click)="logout()">
+                Logout
+            </button>
+        </div>
+        <div class="col-9">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

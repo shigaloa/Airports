@@ -1,0 +1,68 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col bg-dark text-white">
+            <a class="navbar-brand">VUELOS SELECCIONADOS</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mt-2">
+            <h2 class="text-center">Tu selección</h2>
+            <table class="table table-bordered table-striped p-2">
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th>Vuelo</th>
+                        <th class="text-right">Precio</th>
+                        <th class="text-right">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="carrito.lineas.length == 0">
+                        <td colspan="4" class="text-center">
+                            Nada seleccionado
+                        </td>
+                    </tr>
+                    <tr *ngFor="let linea of carrito.lineas">
+                        <td>
+                            <input type="number" class="form-control-sm" style="width:5em" [value]="linea.cantidad"
+                                (change)="carrito.actualizarCantidad(linea.vuelo, $event.target.value)" />
+                        </td>
+                        <td>Compañía: {{linea.vuelo.airline.name}} Vuelo nº: {{linea.vuelo.flight.number}}</td>
+                        <td class="text-right">
+                            {{linea.coste_vuelo | currency:"EUR":true:"2.2-2"}}
+                            <!--{{linea.vuelo.price | currency:"EUR":true:"2.2-2"}}-->
+                        </td>
+                        <td class="text-right">
+                            {{(linea.lineaTotal) | currency:"EUR":true:"2.2-2" }}
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-danger" (click)="carrito.quitarLinea(linea.vuelo.flight.number)">
+                                Quitar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right">Total:</td>
+                        <td class="text-right">
+                            {{carrito.importeTotal | currency:"EUR":"symbol":"2.2-2"}}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="text-center">
+                <button class="btn btn-primary m-1" routerLink="/vuelos">
+                    Continuar seleccionando
+                </button>
+                <button class="btn btn-secondary m-1" routerLink="/checkout" [disabled]="carrito.lineas.length == 0">
+                    Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="form-check">
+    <label class="form-check-label">
+        <input type="checkbox" class="form-check-input" [(ngModel)]="incluirEnviados" />
+        Mostrar pedidos enviados
+    </label>
+</div>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Código postal</th>
+            <th colspan="2">Carrito</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="getPedidos().length == 0">
+            <td colspan="5">No hay pedidos</td>
+        </tr>
+        <ng-template ngFor let-o [ngForOf]="getPedidos()">
+            <tr>
+                <td>{{o.nombre}}</td>
+                <td>{{o.zip}}</td>
+                <th>Vuelo</th>
+                <th>Cantidad</th>
+                <td>
+                    <button class="btn btn-warning" (click)="marcarEnviado(o)">
+                        Enviar
+                    </button>
+                    <button class="btn btn-danger" (click)="borrar(o.id)">
+                        Borrar
+                    </button>
+                </td>
+            </tr>
+            <tr *ngFor="let linea of o.carrito.lineas">
+                <td colspan="2"></td>
+                <td>{{linea.vuelo.airline.name}} {{linea.vuelo.flight.number}}</td>
+                <td>{{linea.cantidad}}</td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>
