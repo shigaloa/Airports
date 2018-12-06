@@ -72,6 +72,7 @@ export class RestDataSource {
     }
 
     getAeropuertos(): Observable<Aeropuerto[]> {
-        return this.http.get<Aeropuerto[]>(this.baseUrl + "aeropuertos");
+        //return this.http.get<Aeropuerto[]>(this.baseUrl + "aeropuertos");
+        return this.http.get<Aeropuerto[]>("https://aviation-edge.com/v2/public/airportDatabase?key=e211fc-96c298&codeIso2Country=ES");
     }
 }

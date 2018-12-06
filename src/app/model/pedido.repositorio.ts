@@ -13,6 +13,7 @@ export class PedidoRepositorio {
 
     //constructor(private dataSource: StaticDataSource) { }
     constructor(private dataSource: RestDataSource) { }
+    //constructor(private dataSource: PedidosDataSource) { }
 
     //Sin autenticación
     /*getPedidos(): Pedido[] {
