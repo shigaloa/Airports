@@ -16,7 +16,7 @@
             <button *ngFor="let aerolinea of aerolineas" class="btn btn-outline-primary btn-block" [class.active]="aerolinea == aerolineaSeleccionada"
                 (click)="cambiarAerolinea(aerolinea)">
                 {{aerolinea}}
-            </button>            
+            </button>           
         </div>
         <div class="col-9 p-2">
             <table class="table table-sm">
@@ -49,10 +49,9 @@
             
             <div class="form-inline float-left mr-1">
                 <select class="form-control" [value]="vuelosPorPagina" (change)="cambiarSizePagina($event.target.value)">
-                    <option value="3">3 por página</option>
-                    <option value="4">4 por página</option>
-                    <option value="6">6 por página</option>
-                    <option value="8">8 por página</option>
+                    <option value="5">5 por página</option>
+                    <option value="10">10 por página</option>
+                    <option value="15">15 por página</option>
                 </select>
             </div>
             <div class="btn-group float-right">

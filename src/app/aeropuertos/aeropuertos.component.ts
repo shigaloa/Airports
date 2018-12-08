@@ -88,7 +88,7 @@ export class AeropuertosComponent implements OnInit {
         //this.navCtrl.setRoot("DetalleEstacionPage", {
         //datoEstacion: selectedMarker.estacion
         //});
-        this.router.navigateByUrl("/vuelos");
+        this.router.navigateByUrl(`/vuelos/${aeropuerto.codeIataAirport}`);
       });
       let infowindow = new google.maps.InfoWindow({
         content:aeropuerto.nameAirport
@@ -101,7 +101,6 @@ export class AeropuertosComponent implements OnInit {
         //
         //this.aeropuertoSeleccionado = aeropuerto;
         
-        console.log('enover: ', this.aeropuertoSeleccionado)
       });
       google.maps.event.addListener(marcador, 'mouseout', function() {
         infowindow.close();
@@ -139,6 +138,6 @@ export class AeropuertosComponent implements OnInit {
   }
 
   irVuelos (aeropuerto: Aeropuerto){
-    this.router.navigateByUrl("/vuelos");
+    this.router.navigateByUrl(`/vuelos/${aeropuerto.codeIataAirport}`);
   }
 }

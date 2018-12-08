@@ -29,7 +29,8 @@ import { CheckoutComponent } from "./checkout/checkout.component";
     CheckoutModule,
     RouterModule.forRoot([
       { path: "aeropuertos", component: AeropuertosComponent },
-      { path: "vuelos", component: VuelosComponent },
+      { path: "vuelos/:aeropuerto", component: VuelosComponent },
+      //{ path: "vuelos", component: VuelosComponent },
       { path: "carrito", component: DetalleCarritoComponent },
       { path: "checkout", component: CheckoutComponent },
       {

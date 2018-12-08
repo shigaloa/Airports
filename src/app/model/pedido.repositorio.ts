@@ -37,20 +37,28 @@ export class PedidoRepositorio {
         return this.pedidos;
     }
 
-    guardarPedido(pedido: Pedido): Observable<Pedido> {
+    guardarPedido(pedido: Pedido): Observable<Pedido[]> {
         return this.dataSource.guardarPedido(pedido);
     }
 
-    actualizarPedido(pedido: Pedido) {
+    /*actualizarPedido(pedido: Pedido) {
         this.dataSource.actualizarPedido(pedido).subscribe(pedido => {
             this.pedidos.splice(this.pedidos.
                 findIndex(o => o.id == pedido.id), 1, pedido);
         });
+    }*/
+
+    actualizarPedido(pedido: Pedido): Observable<Pedido[]> {
+        return this.dataSource.actualizarPedido(pedido);
     }
 
-    borrarPedido(id: number) {
+    /*borrarPedido(id: number) {
         this.dataSource.borrarPedido(id).subscribe(pedido => {
             this.pedidos.splice(this.pedidos.findIndex(o => id == o.id));
         });
+    }*/
+
+    borrarPedido(id: number): Observable<Pedido[]> {
+        return this.dataSource.borrarPedido(id);
     }
 }

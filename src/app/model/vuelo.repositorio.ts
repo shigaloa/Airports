@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { ActivatedRoute } from '@angular/router';
 
 import { Vuelo } from "./vuelo.model";
 //import { StaticDataSource } from "./static.datasource";
@@ -9,21 +10,46 @@ export class VueloRepositorio {
 
     private vuelos: Vuelo[] = [];
     private aerolineas: string[] = [];
+    private aeropuertoSeleccionado: string = null;
 
     //constructor(private dataSource: StaticDataSource) {
-    constructor(private dataSource: RestDataSource) {
-        dataSource.getVuelos().subscribe(data => {
+    constructor(private dataSource: RestDataSource, private route: ActivatedRoute) {
+        this.route.params.subscribe( params => 
+            {this.aeropuertoSeleccionado = params['aeropuerto'];
+             //dataSource.getVuelos(this.aeropuertoSeleccionado).subscribe(data => {
+             console.log('aeropu seelec: ', this.aeropuertoSeleccionado)
+             dataSource.getVuelos("SVQ").subscribe(data => {    
+                this.vuelos = data;
+                this.aerolineas = data.map(p => p.airline.name)
+                    .filter((c, index, array) => array.indexOf(c) == index).sort();
+            })}
+        );
+        /*dataSource.getVuelos(this.aeropuertoSeleccionado).subscribe(data => {
             this.vuelos = data;
-            console.log('datavuelo',data)
             this.aerolineas = data.map(p => p.airline.name)
                 .filter((c, index, array) => array.indexOf(c) == index).sort();
-        });
+        })*/
     }
 
     getVuelos(aerolinea: string = null): Vuelo[] {
         return this.vuelos
             .filter(p => aerolinea == null || aerolinea == p.airline.name);
     }
+
+    /*getVuelos(aerolinea: string = null, aeropuerto: string = null): any{ //Vuelo[] {
+        console.log('entro getvuelos')
+        this.dataSource.getVuelos(aeropuerto).subscribe(data => {
+            this.vuelos = data;
+            this.aerolineas = data.map(p => p.airline.name)
+                .filter((c, index, array) => array.indexOf(c) == index).sort();
+            return this.vuelos
+                .filter(p => aerolinea == null || aerolinea == p.airline.name);
+        });
+        return this.vuelos
+            .filter(p => aerolinea == null || aerolinea == p.airline.name);
+        this.aeropuertoSeleccionado = aeropuerto;
+        return this.vuelos;
+}*/
 
     getVuelo(id: string): Vuelo {
         return this.vuelos.find(p => p.flight.number == id);
